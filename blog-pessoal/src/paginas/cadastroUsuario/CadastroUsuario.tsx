@@ -8,16 +8,17 @@ import { Box } from "@mui/material";
 import "./CadastroUsuario.css";
 
 function CadastroUsuario() {
-
     let history = useNavigate();
+
     const [confirmarSenha, setConfirmarSenha] = useState<String>("")
     const [user, setUser] = useState<User>(
         {
             id: 0,
             nome: '',
             usuario: '',
-            senha: '',
             foto: '',
+            senha: '',
+            
         })
 
     const [userResult, setUserResult] = useState<User>(
@@ -25,15 +26,9 @@ function CadastroUsuario() {
             id: 0,
             nome: '',
             usuario: '',
-            senha: '',
             foto: '',
+            senha: '',
         })
-
-    useEffect(() => {
-        if (userResult.id != 0) {
-            history("/login")
-        }
-    }, [userResult])
 
 
     function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
@@ -47,18 +42,31 @@ function CadastroUsuario() {
             ...user,
             [e.target.name]: e.target.value
         })
-
     }
+
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
 
         if (confirmarSenha == user.senha) {
-            cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-            alert('Usuario cadastrado com sucesso')
+            try {
+                await cadastroUsuario(`/usuario/cadastrar`, user, setUserResult);
+                alert('Usuário cadastrado com sucesso')
+            } catch (error) {
+                alert('Falha interna ao cadastrar!');
+            }
         } else {
             alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+
+            setUser({ ...user, senha: '' });
+            setConfirmarSenha('');
         }
     }
+
+    useEffect(() => {
+        if (userResult.id != 0) {
+            history("/login")
+        }
+    }, [userResult])
 
 
     return (
@@ -73,12 +81,14 @@ function CadastroUsuario() {
                         <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="foto" label="URL da foto" variant="outlined" name="foto" margin='normal' fullWidth />
                         <TextField value={user.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="senha" label="senha" variant="outlined" name="senha" margin="normal" type='password' fullWidth />
                         <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id="confirmarSenha" label="confirmarSenha" variant="outlined" name="confirmarSenha" margin="normal" type='password' fullWidth />
+                        
                         <Box marginTop={2} textAlign="center">
                             <Link to="/login" className="text-decorator-none">
                                 <Button variant="contained" color="secondary" className="btnCancelar" >
                                     Cancelar
                                 </Button>
                             </Link>
+
                             <Button type="submit" variant="contained" color="primary">
                                 Cadastrar
                             </Button>
