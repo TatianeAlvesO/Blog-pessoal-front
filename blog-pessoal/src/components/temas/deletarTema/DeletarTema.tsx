@@ -7,9 +7,10 @@ import { buscaId, deleteId } from '../../../services/Service';
 import Tema from '../../../models/Tema';
 import './DeletarTema.css';
 
+
 function DeletarTema() {
     let navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams<{id: string}>();
     const [token, setToken] = useLocalStorage('token');
     const [tema, setTema] = useState<Tema>()
 
@@ -17,7 +18,6 @@ function DeletarTema() {
         if (token == "") {
             alert("Você precisa estar logado")
             navigate("/login")
-
         }
     }, [token])
 
@@ -28,7 +28,7 @@ function DeletarTema() {
     }, [id])
 
     async function findById(id: string) {
-        buscaId(`/tema/${id}`, setTema, {
+        buscaId(`/temas/${id}`, setTema, {
             headers: {
                 'Authorization': token
             }
@@ -37,7 +37,7 @@ function DeletarTema() {
 
     function sim() {
         navigate('/temas')
-        deleteId(`/tema/${id}`, {
+        deleteId(`/temas/${id}`, {
             headers: {
                 'Authorization': token
             }
