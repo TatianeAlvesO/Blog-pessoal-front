@@ -6,14 +6,26 @@ import { login } from '../../services/Service';
 import UserLogin from '../../models/UserLogin';
 import './Login.css';
 import { useDispatch } from 'react-redux';
-import { addToken } from '../../store/tokens/actions';
+import { addId, addToken } from '../../store/tokens/actions';
 import { toast } from 'react-toastify';
 
 function Login() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
     const [token, setToken] = useState('');
+
     const [userLogin, setUserLogin] = useState<UserLogin>(
+        {
+            id: 0,
+            nome: '',
+            usuario: '',
+            foto: '',
+            senha: '',
+            token: '',
+        }
+    )
+
+    const [respUserLogin, setRespUserLogin] = useState<UserLogin>(
         {
             id: 0,
             nome: '',
@@ -32,17 +44,14 @@ function Login() {
         })
     }
 
-    useEffect(() => {
-        if (token != '') {
-            dispatch(addToken(token))
-            navigate('/home')
-        }
-    }, [token])
+    
+    const [form, setForm] = useState(false);
+
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await login(`/usuario/logar`, userLogin, setToken)
+            await login(`/usuario/logar`, userLogin, setRespUserLogin);
             toast.success("Usuário logado com sucesso!", {
                 position: "top-right",
                 autoClose: 2000,
@@ -66,6 +75,21 @@ function Login() {
             });
         }
     }
+
+    useEffect(() => {
+        if (token != '') {
+            dispatch(addToken(token))
+            navigate('/home')
+        }
+    }, [token])
+
+    useEffect(() => {
+        if (respUserLogin.token !== '') {
+            dispatch(addToken(respUserLogin.token));
+            dispatch(addId(respUserLogin.id.toString()));
+            navigate('/home');
+        }
+    }, [respUserLogin.token]);
 
     return (
         <Grid container direction='row' justifyContent='center' alignItems='center'>
