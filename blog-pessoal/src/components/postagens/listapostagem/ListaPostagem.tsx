@@ -45,7 +45,7 @@ function ListaPostagem() {
     useEffect(() => {
         getPost()
     }, [posts.length])
-    
+
 
     return (
         <>
@@ -65,6 +65,9 @@ function ListaPostagem() {
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                     {post.tema?.descricao}
+                                </Typography>
+                                <Typography variant="body2" component="p">
+                                    Postado por: {post.usuario?.nome}
                                 </Typography>
                             </CardContent>
                             <CardActions>
