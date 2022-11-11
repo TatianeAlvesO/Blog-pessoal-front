@@ -6,9 +6,10 @@ import { Grid, Typography, Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import "./CadastroUsuario.css";
+import { toast } from "react-toastify";
 
 function CadastroUsuario() {
-    let history = useNavigate();
+    let navigate = useNavigate();
 
     const [confirmarSenha, setConfirmarSenha] = useState<String>("")
     const [user, setUser] = useState<User>(
@@ -50,13 +51,39 @@ function CadastroUsuario() {
         if (confirmarSenha == user.senha) {
             try {
                 await cadastroUsuario(`/usuario/cadastrar`, user, setUserResult);
-                alert('Usuário cadastrado com sucesso')
+                toast.success("Usuário cadastrado com sucesso!", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             } catch (error) {
-                alert('Falha interna ao cadastrar!');
+                toast.error("Falha interna ao cadastrar!", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined,
+                });
             }
         } else {
-            alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
-
+            toast.error("Dados inconsistentes. Favor verificar as informações de cadastro!", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
             setUser({ ...user, senha: '' });
             setConfirmarSenha('');
         }
@@ -64,7 +91,7 @@ function CadastroUsuario() {
 
     useEffect(() => {
         if (userResult.id != 0) {
-            history("/login")
+            navigate("/login")
         }
     }, [userResult])
 
