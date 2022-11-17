@@ -1,10 +1,10 @@
 .imagem2{
-    background-image: url(https://cdn.dribbble.com/userupload/3908319/file/original-1552bdb36ce487d984ba7e3f7677cf9d.png?compress=1&resize=1024x745);
+    background-image: url(https://cdn.dribbble.com/userupload/3829630/file/original-e0e275874b52009a537484d7785b9fa0.png?compress=1&resize=1024x768);
     background-repeat: no-repeat;
-    width: 50vh;
+    width: 100vh;
     min-height: 100vh;
     background-size: cover;
-    background-position: left;
+    background-position: center;
 }
 
 .textos2{

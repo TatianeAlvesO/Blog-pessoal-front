@@ -21,3 +21,12 @@
     text-decoration: none;
 }
 
+.img-home{
+    background-image: url(https://cdn.dribbble.com/userupload/3908320/file/original-a9f7f6f1350ae2b8f885aefb2dff889c.png?compress=1&resize=752x564&vertical=center);
+    background-repeat: no-repeat;
+    width: 50vh;
+    min-height: 80vh;
+    background-size: cover;
+    background-position: center;
+}
+
