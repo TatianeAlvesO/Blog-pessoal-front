@@ -50,8 +50,7 @@ function Home() {
                         </Link>
                     </Box>
                 </Grid>
-                <Grid item xs={6} >
-                    <img src="https://cdn.dribbble.com/userupload/3908320/file/original-a9f7f6f1350ae2b8f885aefb2dff889c.png?compress=1&resize=752x564&vertical=center" alt="" width="700px" height="540px" vertical-align="initial" />
+                <Grid item xs={6} className='img-home'>
                 </Grid>
                 <Grid xs={12} className='postagens'>
                     <TabPostagem />
