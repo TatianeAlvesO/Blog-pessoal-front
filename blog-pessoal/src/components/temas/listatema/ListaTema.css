@@ -2,3 +2,9 @@
     text-decoration: none;
 }
 
+.box-card {
+    max-width: 50vw;
+    max-height: 50vh !important;
+    transform: translateX(50%);
+    margin-bottom: 15px;
+}
