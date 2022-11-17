@@ -51,7 +51,7 @@ function ListaTema() {
         <>
             {
                 temas.map(tema => (
-                    <Box m={2} >
+                    <Box m={2} className='box-card'>
                         <Card variant="outlined">
                             <CardContent>
                                 <Typography color="textSecondary" gutterBottom>

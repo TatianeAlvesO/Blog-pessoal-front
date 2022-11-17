@@ -38,7 +38,7 @@ function Navbar() {
         <Toolbar className="navbarBarra" variant="dense">
             <Box className='cursor'>
                 <Typography variant="h5" color="inherit">
-                    BlogPessoal
+                    Blog da Tatiane
                 </Typography>
             </Box>
 
